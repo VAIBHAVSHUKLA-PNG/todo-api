@@ -3,8 +3,7 @@ from pydantic import BaseModel
 
 app = FastAPI(title="To-Do List API")
 
-# --- In-memory "database" ---
-# Just a dict of {id: task}. Everything resets when the server restarts.
+
 tasks: dict[int, "Task"] = {}
 next_id = 1
 
@@ -24,7 +23,7 @@ def root():
     return {"message": "To-Do API is running. Visit /docs for Swagger UI."}
 
 
-# --- CREATE ---
+
 @app.post("/tasks", response_model=TaskOut)
 def create_task(task: Task):
     global next_id
@@ -34,13 +33,13 @@ def create_task(task: Task):
     return new_task
 
 
-# --- READ (all) ---
+
 @app.get("/tasks", response_model=list[TaskOut])
 def list_tasks():
     return list(tasks.values())
 
 
-# --- READ (one) ---
+
 @app.get("/tasks/{task_id}", response_model=TaskOut)
 def get_task(task_id: int):
     if task_id not in tasks:
@@ -48,7 +47,7 @@ def get_task(task_id: int):
     return tasks[task_id]
 
 
-# --- UPDATE ---
+
 @app.put("/tasks/{task_id}", response_model=TaskOut)
 def update_task(task_id: int, task: Task):
     if task_id not in tasks:
@@ -58,7 +57,7 @@ def update_task(task_id: int, task: Task):
     return updated_task
 
 
-# --- DELETE ---
+
 @app.delete("/tasks/{task_id}")
 def delete_task(task_id: int):
     if task_id not in tasks:

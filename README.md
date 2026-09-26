@@ -101,8 +101,7 @@ see your database edit reflected instantly, no server restart needed. That's
 the core idea of this assignment: the API and the database are two separate
 layers, and either one can change the same underlying data.
 
-> 📸 **Add your own screenshot here** of DB Browser for SQLite with `tasks.db`
-> open, to show in your submission.
+![DB Browser showing the tasks table](db-screenshot.png)
 
 ## Quick test with curl
 
